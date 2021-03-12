@@ -13,9 +13,17 @@ class vid:
     
     def parsevid(self):
         data = self.getvid()
+        if data.get("items", "error") == "error":
+            with open("log.json", "a") as f:
+                f.write(json.dumps(data) + "\n")
+                return ["Error please check logs", "Error please check logs", "Error please check logs"]
+        else:
+            with open("log.json", "a") as f:
+                f.write(json.dumps(data) + "\n")
         id: str = data["items"][0]["id"]["videoId"]
         title: str = data["items"][0]["snippet"]["title"]
-        return [id, title]
+        ptime: str = data["items"][0]["snippet"]["publishedAt"]
+        return [id, title, ptime]
 
 if __name__ == "__main__":
     with open("data.json", "r") as f:

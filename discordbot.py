@@ -23,12 +23,12 @@ async def on_message(message):
     while True:
         newvid = yt.parsevid()
         if latestid != newvid[0]:
-            msg = f"{message.author.mention} \nLTT posted a new video!: {newvid[1]}. Link: https://youtu.be/{newvid[0]}"
+            msg = f"{message.author.mention} \nLTT posted a new video!: {newvid[1]} at {newvid[2][:-1].replace('T', '_')} UTC. Link: https://youtu.be/{newvid[0]}"
             await message.author.send(msg)
             print(msg)
             latestid = newvid[0]
 
-        await asyncio.sleep(30)
+        await asyncio.sleep(900)
 
         print(request)
         
